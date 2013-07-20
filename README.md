@@ -1,4 +1,4 @@
-Ispy
+Ispy v0.1
 ====
 
 Note: will only work with 2.7.x versions of python, will not work with 3.x
