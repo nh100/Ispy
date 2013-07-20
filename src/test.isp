@@ -1,0 +1,3 @@
+(out "hello")
+(out "hello world")
+(out (+ 5 (/ 4 2)))
