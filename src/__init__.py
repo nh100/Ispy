@@ -66,6 +66,7 @@ def inp(args):
     return raw_input()
         
 def atoi(args):
+    if not isinstance(args, list): return int(eval(args))
     if len(args) != 1:
         panic("incorrect # of arguments")
     else:
@@ -75,7 +76,15 @@ def fst(args):
     if not isinstance(args[0], list):
         panic("argument not list")
     else: return eval_(args[0][0])
-            
+
+def eq(args):
+    if check_args(args, 2):
+        return args[0] == args[1]    
+    
+def lt(args):
+    if check_args(args, 2):
+        return args[0] < args[1]    
+
 def set_var(args):
     global_env[args[0]] = args[1]
     print global_env
@@ -103,7 +112,8 @@ defined_macros = {
                     Symbol('atoi'):atoi, Symbol('fst'):fst,
                     Symbol('set'):set_var, Symbol('pyeval'):pyeval,
                     Symbol('if'):cond, Symbol('>'):gt,
-                    Symbol('get'):get_var, Symbol('pi'):mathlib.pi                   
+                    Symbol('get'):get_var, Symbol('pi'):mathlib.pi,
+                    Symbol('='):eq, Symbol('<'):lt                 
                     }
         
 def is_atom(it):
@@ -123,7 +133,7 @@ def run():
     else:
         print '''
             --------------------
-            Ispy Interpreter v'''+str(VERSION)+'''
+            Isp Interpreter v'''+str(VERSION)+'''
             --------------------'''
         while True:
             sys.stdout.write("?> ")
