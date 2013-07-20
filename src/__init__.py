@@ -7,7 +7,7 @@ Created on Jul 16, 2013
 
 from sexpdata import Symbol, loads
 import sys
-from mathlib import *
+import mathlib
 
 global_env = {}
 VERSION = 0.1
@@ -103,7 +103,7 @@ defined_macros = {
                     Symbol('atoi'):atoi, Symbol('fst'):fst,
                     Symbol('set'):set_var, Symbol('pyeval'):pyeval,
                     Symbol('if'):cond, Symbol('>'):gt,
-                    Symbol('get'):get_var
+                    Symbol('get'):get_var, Symbol('pi'):mathlib.pi                   
                     }
         
 def is_atom(it):
@@ -131,6 +131,7 @@ def run():
             input = input.replace('[', '(')
             input = input.replace(']', ')')
             if not input: break
+            if input.split()[0] == "'": continue
             print(str(eval_(loads(input, true='true', false='false'))))
        
 
