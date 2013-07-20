@@ -123,7 +123,7 @@ def run():
     else:
         print '''
             --------------------
-            Isp Interpreter v'''+str(VERSION)+'''
+            Ispy Interpreter v'''+str(VERSION)+'''
             --------------------'''
         while True:
             sys.stdout.write("?> ")
