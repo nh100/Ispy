@@ -3,6 +3,7 @@ from mathlib import *
 import lists as l
 
 from sexpdata import Symbol
+from func import Function
 global_env = {}
 VERSION = 0.1
 class Panic(object):
@@ -14,14 +15,23 @@ class Panic(object):
         
 def panic(s):
             sys.stderr.write(str(Panic(s)))
-                  
+            print()
+
+def panic_(args):
+    panic(args[0])
+         
 def out(args):
     if check_args(args, 1):
         for v in args: sys.stdout.write(str(eval_(v)))
     return ''
         
+def _str_add(args):
+    sm = ''
+    for s in args:
+        sm += str(s)
+    return sm
+
 def add(args):
-    if check_args(args, 2):
         sum = 0
         for i in args: 
             sum += eval_(i)
@@ -65,11 +75,11 @@ def atoi(args):
         panic("incorrect # of arguments")
     else:
         return int(eval(args[0]))
-        
-def fst(args):
-    if not isinstance(args[0], list):
-        panic("argument not list")
-    else: return eval_(args[0][0])
+   
+def def_func(args):
+    return Function(args[0], args[1])
+
+
 
 def eq(args):
     if check_args(args, 2):
@@ -102,20 +112,26 @@ def get_var(args):
     if args[0].tosexp() in global_env:
         return global_env[eval_(args[0].tosexp())]
  
+
 defined_macros = {
                     Symbol('out'):out, Symbol('+'):add,
                     Symbol('-'):sub, Symbol('*'):mul,
                     Symbol('/'):div, Symbol('in'):inp,
-                    Symbol('atoi'):atoi, Symbol('fst'):fst,
+                    Symbol('atoi'):atoi, Symbol('fst'):l.fst,
                     Symbol('set'):set_var, Symbol('pyeval'):pyeval,
                     Symbol('if'):cond, Symbol('>'):gt,
                     Symbol('get'):get_var, Symbol('..'): range_,
                     Symbol('='):eq, Symbol('<'):lt,
                     Symbol('sqrt'):sqrt_, Symbol('sq'):sq,
                     Symbol('pi'):pi, Symbol('++'):l.sum_,
-                    Symbol('abs'):abs_, Symbol('get'):get_var
+                    Symbol('abs'):abs_, Symbol('get'):get_var,
+                    Symbol('fun'):def_func, Symbol('even'):even,
+                    Symbol('odd'):odd, Symbol('prime'):is_prime,
+                    Symbol('panic'):panic_, Symbol('tail'):l.tail
                     }
-        
+def call_func(func, args):
+    return func.call(args)
+
 def is_atom(it):
     return not isinstance(it, list)
 
@@ -124,4 +140,6 @@ def eval_(exp):
         if not is_atom(exp):
             if exp[0] == m:
                 return defined_macros[m](exp[1:])
+    if not is_atom(exp) and hasattr(exp[0], 'tosexp') and isinstance(global_env[exp[0].tosexp()], Function):
+        return call_func(global_env[exp[0].tosexp()], exp[1:])
     return exp
