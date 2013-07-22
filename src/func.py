@@ -18,6 +18,8 @@ class Function(object):
     
     def call(self, call_args):
         # ls = [(arg, call_arg) for arg in self.args for call_arg in call_args]
+        if  not isinstance(call_args[0], list):
+            return call_args[0]
         call_val = [v for v in self.val]
         for i, v in enumerate(self.args):
             call_val = self._replacel(call_val, v, call_args[i])
