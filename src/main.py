@@ -5,7 +5,7 @@ import lists as l
 from sexpdata import Symbol
 from func import Function
 global_env = {}
-VERSION = 0.1
+VERSION = 0.2
 class Panic(object):
     msg = ''
     def __init__(self, s):
