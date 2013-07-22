@@ -18,3 +18,5 @@ Change Log
   seperated `__init__.py` and `main.py` into seperate files
   
   added function definitions
+
+For more info and ispy specification go to https://github.com/nh100/Ispy/wiki
