@@ -1,4 +1,4 @@
-Ispy v0.2
+Ispy v0.25
 ====
 
 Note: will only work with 2.7.x versions of python, will not work with 3.x
@@ -16,3 +16,5 @@ Change Log
   new math expressions sq, sqrt
   
   seperated __init__.py and main.py into seperate files
+  
+  added function definitions
