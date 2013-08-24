@@ -1,8 +1,8 @@
 Ispy v0.25
 ====
 
-[B}I am discontinuing Ispy to work on another project that will replace it. Ispy itself has many design flaws which 
-cannot be fixed easily and was experimental, I'll keep the repo up for a while until I decide to delete it[/B]
+I am discontinuing Ispy to work on another project that will replace it. Ispy itself has many design flaws which 
+cannot be fixed easily and was experimental, I'll keep the repo up for a while until I decide to delete it
 
 Note: will only work with 2.7.x versions of python, will not work with 3.x
 
